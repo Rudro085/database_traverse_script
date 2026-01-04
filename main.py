@@ -64,13 +64,13 @@ def setup_logger(name: str = None, level: int = logging.INFO):
     return logger
 
 
-cache_db_conf = DatabaseConfig(
-    host = "10.0.1.42",
-    user='root',
-    password='toortoor',
-    database='projapoti_db_v2'
-)
-cache_db_conn = DatabaseConnection(cache_db_conf)
+# cache_db_conf = DatabaseConfig(
+#     host = "10.0.1.42",
+#     user='root',
+#     password='toortoor',
+#     database='projapoti_db_v2'
+# )
+# cache_db_conn = DatabaseConnection(cache_db_conf)
 
 # module logger
 logger = setup_logger('db_traverse')
@@ -78,23 +78,33 @@ logger = setup_logger('db_traverse')
 office_list = ['65']
 
 office_queue = Queue()
-cache_db_conn.connect()
 
-cur = cache_db_conn.cursor
-for office in office_list:
-    cur.execute("SELECT * FROM office_domains WHERE office_id = %s",(office,))
-    data = cur.fetchone()
-    logger.info(f"Found office domain: {data.get('domain_host')}")
-    new_db_conf = DatabaseConfig(
-        host=data['domain_host'],
-        user=data['domain_username'],
-        password=data['domain_password'],
-        database=data['office_db']
+
+new_db_conf = DatabaseConfig(
+        host='10.0.1.160',
+        user='root',
+        password='toortoor',
+        database='projapoti_65_v2'
     )
-    office_queue.put(new_db_conf)
 
-logger.info(f"All selected databases are added to the queue")
-cache_db_conn.disconnect()
+office_queue.put(new_db_conf)
+# cache_db_conn.connect()
+
+# cur = cache_db_conn.cursor
+# for office in office_list:
+#     cur.execute("SELECT * FROM office_domains WHERE office_id = %s",(office,))
+#     data = cur.fetchone()
+#     logger.info(f"Found office domain: {data.get('domain_host')}")
+#     new_db_conf = DatabaseConfig(
+#         host=data['domain_host'],
+#         user=data['domain_username'],
+#         password=data['domain_password'],
+#         database=data['office_db']
+#     )
+#     office_queue.put(new_db_conf)
+
+# logger.info(f"All selected databases are added to the queue")
+# cache_db_conn.disconnect()
 
 for queue_i in range(office_queue._qsize()):
     office_db_conf = office_queue.get()
@@ -103,7 +113,7 @@ for queue_i in range(office_queue._qsize()):
     office_db_conn.connect()
     logger.info(f"Connected to {office_db_conf.database} at {office_db_conf.host}")
     cur = office_db_conn.cursor
-    # Iterate rows one-by-one by id and update immediately
+
     cur.execute("SELECT id FROM khoshra_draft_versions ORDER BY id ASC LIMIT 1")
     row = cur.fetchone()
     cur.execute("SELECT COUNT(*) as total_rows FROM khoshra_draft_versions")
