@@ -177,8 +177,8 @@ for queue_i in range(office_queue._qsize()):
                 img_tag.decompose()
             cleaned_html = str(soup)
             encoded_cleaned_html = base64.b64encode(cleaned_html.encode('utf-8'))
-            with open(f'cleaned_html_{khosra_draft_versions_id}.txt', 'wb') as f:
-                f.write(encoded_cleaned_html)
+            # with open(f'cleaned_html_{khosra_draft_versions_id}.txt', 'wb') as f:
+            #     f.write(encoded_cleaned_html)
             if not should_skip:
                 cur.execute("UPDATE khoshra_draft_versions SET updated_content = %s WHERE id = %s", (encoded_cleaned_html, khosra_draft_versions_id))
                 office_db_conn.commit()
