@@ -6,6 +6,7 @@ import io
 import binascii
 import re
 import pybase64
+import logging
 
 import base64
 import re
@@ -51,6 +52,18 @@ def decode_base64(b64_string: str) -> bytes:
     return base64.b64decode(b64_string, validate=False)
 
 
+def setup_logger(name: str = None, level: int = logging.INFO):
+    logger_name = name or __name__
+    logger = logging.getLogger(logger_name)
+    if not logger.handlers:
+        handler = logging.StreamHandler()
+        fmt = '%(asctime)s %(levelname)-8s %(name)s: %(message)s'
+        handler.setFormatter(logging.Formatter(fmt))
+        logger.addHandler(handler)
+    logger.setLevel(level)
+    return logger
+
+
 cache_db_conf = DatabaseConfig(
     host = "10.0.1.42",
     user='root',
@@ -58,6 +71,9 @@ cache_db_conf = DatabaseConfig(
     database='projapoti_db_v2'
 )
 cache_db_conn = DatabaseConnection(cache_db_conf)
+
+# module logger
+logger = setup_logger('db_traverse')
 
 office_list = ['65']
 
@@ -68,7 +84,7 @@ cur = cache_db_conn.cursor
 for office in office_list:
     cur.execute("SELECT * FROM office_domains WHERE office_id = %s",(office,))
     data = cur.fetchone()
-    print(data['domain_host'])
+    logger.info(f"Found office domain: {data.get('domain_host')}")
     new_db_conf = DatabaseConfig(
         host=data['domain_host'],
         user=data['domain_username'],
@@ -85,37 +101,46 @@ for queue_i in range(office_queue._qsize()):
     # try:
     office_db_conn = DatabaseConnection(office_db_conf)
     office_db_conn.connect()
+    logger.info(f"Connected to {office_db_conf.database} at {office_db_conf.host}")
     cur = office_db_conn.cursor
     # Iterate rows one-by-one by id and update immediately
     cur.execute("SELECT id FROM khoshra_draft_versions ORDER BY id ASC LIMIT 1")
     row = cur.fetchone()
     if row is None:
+        logger.info(f"No rows found in khoshra_draft_versions for {office_db_conf.database}")
         office_db_conn.disconnect()
         continue
     current_id = row['id']
+    logger.info(f"Starting processing khoshra_draft_versions from id {current_id}")
     while current_id is not None:
         cur.execute("SELECT * FROM khoshra_draft_versions WHERE id = %s", (current_id,))
         data = cur.fetchone()
         if data is None:
             break
-        encoded_data = data['updated_content']
-        khosra_draft_versions_id = data['id']
-        decoded_string = decode_base64(encoded_data)
-        html_content = decoded_string
-        soup = BeautifulSoup(html_content, 'html.parser')
-        for img_tag in soup.find_all('img'):
-            img_tag.decompose()
-        cleaned_html = str(soup)
-        encoded_cleaned_html = base64.b64encode(cleaned_html.encode('utf-8'))
-        with open(f'cleaned_html_{khosra_draft_versions_id}.txt', 'wb') as f:
-            f.write(encoded_cleaned_html)
-        cur.execute("UPDATE khoshra_draft_versions SET updated_content = %s WHERE id = %s", (encoded_cleaned_html, khosra_draft_versions_id))
-        office_db_conn.commit()
+        try:
+            encoded_data = data['updated_content']
+            khosra_draft_versions_id = data['id']
+            logger.info(f"Processing id={khosra_draft_versions_id}")
+            decoded_string = decode_base64(encoded_data)
+            html_content = decoded_string
+            soup = BeautifulSoup(html_content, 'html.parser')
+            for img_tag in soup.find_all('img'):
+                img_tag.decompose()
+            cleaned_html = str(soup)
+            encoded_cleaned_html = base64.b64encode(cleaned_html.encode('utf-8'))
+            with open(f'cleaned_html_{khosra_draft_versions_id}.txt', 'wb') as f:
+                f.write(encoded_cleaned_html)
+            cur.execute("UPDATE khoshra_draft_versions SET updated_content = %s WHERE id = %s", (encoded_cleaned_html, khosra_draft_versions_id))
+            office_db_conn.commit()
+            logger.info(f"Updated id={khosra_draft_versions_id}, size before: {len(encoded_data)} bytes, size after: {len(encoded_cleaned_html)} bytes")
+        except Exception:
+            logger.exception(f"Failed processing id={current_id}")
         cur.execute("SELECT id FROM khoshra_draft_versions WHERE id > %s ORDER BY id ASC LIMIT 1", (current_id,))
         next_row = cur.fetchone()
         if not next_row:
             break
         current_id = next_row['id']
+    logger.info(f"Finished processing khoshra_draft_versions for {office_db_conf.database}")
     office_db_conn.disconnect()
 
     # except:
