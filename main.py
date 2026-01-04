@@ -7,6 +7,7 @@ import binascii
 import re
 import pybase64
 import logging
+import datetime
 
 import base64
 import re
@@ -125,6 +126,8 @@ for queue_i in range(office_queue._qsize()):
         continue
     current_id = row['id']
     logger.info(f"Starting processing khoshra_draft_versions from id {current_id}")
+    # only process rows older than 3 months
+    threshold = datetime.datetime.now() - datetime.timedelta(days=90)
     while current_id is not None:
         cur.execute("SELECT * FROM khoshra_draft_versions WHERE id = %s", (current_id,))
         data = cur.fetchone()
@@ -132,9 +135,41 @@ for queue_i in range(office_queue._qsize()):
         if data is None:
             break
         try:
-            encoded_data = data['updated_content']
             khosra_draft_versions_id = data['id']
-            logger.info(f"Processing id={khosra_draft_versions_id}")
+            modified_val = data.get('modified')
+            modified_dt = None
+            should_skip = False
+            # MySQL drivers often return datetime objects; handle both
+            if isinstance(modified_val, datetime.datetime):
+                modified_dt = modified_val
+            elif isinstance(modified_val, str):
+                # expected format: 'YYYY-MM-DD HH:MM:SS'
+                try:
+                    modified_dt = datetime.datetime.strptime(modified_val, "%Y-%m-%d %H:%M:%S")
+                except Exception:
+                    try:
+                        modified_dt = datetime.datetime.fromisoformat(modified_val)
+                    except Exception:
+                        logger.warning(f"Could not parse modified for id={khosra_draft_versions_id}: {modified_val}; skipping")
+                        modified_dt = None
+            else:
+                logger.warning(f"Unknown modified type for id={khosra_draft_versions_id}: {type(modified_val)}; skipping")
+
+            if modified_dt is None:
+                # skip rows without a valid modified timestamp
+                should_skip = True
+
+            if modified_dt and modified_dt > threshold:
+                logger.info(f"Skipping id={khosra_draft_versions_id} (modified={modified_dt}) — newer than 3 months")
+                should_skip = True
+
+            if should_skip:
+                # do not process this row; advance to next below
+                encoded_data = None
+            else:
+                # proceed with processing
+                encoded_data = data['updated_content']
+            logger.info(f"Processing id={khosra_draft_versions_id} (modified={modified_dt})")
             decoded_string = decode_base64(encoded_data)
             html_content = decoded_string
             soup = BeautifulSoup(html_content, 'html.parser')
@@ -144,10 +179,10 @@ for queue_i in range(office_queue._qsize()):
             encoded_cleaned_html = base64.b64encode(cleaned_html.encode('utf-8'))
             with open(f'cleaned_html_{khosra_draft_versions_id}.txt', 'wb') as f:
                 f.write(encoded_cleaned_html)
-            cur.execute("UPDATE khoshra_draft_versions SET updated_content = %s WHERE id = %s", (encoded_cleaned_html, khosra_draft_versions_id))
-            office_db_conn.commit()
-            logger.info(f"Updated id={khosra_draft_versions_id} progress={count}/{total_rows_count['total_rows']}, size before: {len(encoded_data)} bytes, size after: {len(encoded_cleaned_html)} bytes")
-            
+            if not should_skip:
+                cur.execute("UPDATE khoshra_draft_versions SET updated_content = %s WHERE id = %s", (encoded_cleaned_html, khosra_draft_versions_id))
+                office_db_conn.commit()
+                logger.info(f"Updated id={khosra_draft_versions_id} progress={count}/{total_rows_count['total_rows']}, size before: {len(encoded_data)} bytes, size after: {len(encoded_cleaned_html)} bytes")
         except Exception:
             logger.exception(f"Failed processing id={current_id}")
         cur.execute("SELECT id FROM khoshra_draft_versions WHERE id > %s ORDER BY id ASC LIMIT 1", (current_id,))
