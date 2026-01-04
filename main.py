@@ -86,9 +86,15 @@ for queue_i in range(office_queue._qsize()):
     office_db_conn = DatabaseConnection(office_db_conf)
     office_db_conn.connect()
     cur = office_db_conn.cursor
-    cur.execute("SELECT * FROM khoshra_draft_versions")
-    cleaned_html_tuple = []
-    while True:
+    # Iterate rows one-by-one by id and update immediately
+    cur.execute("SELECT id FROM khoshra_draft_versions ORDER BY id ASC LIMIT 1")
+    row = cur.fetchone()
+    if row is None:
+        office_db_conn.disconnect()
+        continue
+    current_id = row['id']
+    while current_id is not None:
+        cur.execute("SELECT * FROM khoshra_draft_versions WHERE id = %s", (current_id,))
         data = cur.fetchone()
         if data is None:
             break
@@ -101,16 +107,15 @@ for queue_i in range(office_queue._qsize()):
             img_tag.decompose()
         cleaned_html = str(soup)
         encoded_cleaned_html = base64.b64encode(cleaned_html.encode('utf-8'))
-        
         with open(f'cleaned_html_{khosra_draft_versions_id}.txt', 'wb') as f:
             f.write(encoded_cleaned_html)
-        cleaned_html_tuple.append([khosra_draft_versions_id,encoded_cleaned_html])
-    
-    for cleaned_html in cleaned_html_tuple:
-        cur.execute("UPDATE khoshra_draft_versions SET updated_content = %s WHERE id = %s", (cleaned_html[1], cleaned_html[0]))
-    office_db_conn.commit()
-        
-
+        cur.execute("UPDATE khoshra_draft_versions SET updated_content = %s WHERE id = %s", (encoded_cleaned_html, khosra_draft_versions_id))
+        office_db_conn.commit()
+        cur.execute("SELECT id FROM khoshra_draft_versions WHERE id > %s ORDER BY id ASC LIMIT 1", (current_id,))
+        next_row = cur.fetchone()
+        if not next_row:
+            break
+        current_id = next_row['id']
     office_db_conn.disconnect()
 
     # except:

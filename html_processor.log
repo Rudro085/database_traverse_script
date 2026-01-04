@@ -238,3 +238,26 @@
 2025-12-29 15:42:54,841 - INFO - Connected to database 'projapoti_65_v2' on 10.0.1.160:3306
 2025-12-29 15:42:55,051 - INFO - Transaction committed successfully
 2025-12-29 15:42:55,054 - INFO - Database connection closed
+2025-12-30 16:16:06,602 - INFO - Connected to database 'projapoti_db_v2' on 10.0.1.42:3306
+2025-12-30 16:16:06,608 - INFO - All selected databases are added to the queue
+2025-12-30 16:16:06,613 - INFO - Database connection closed
+2025-12-30 16:16:06,640 - INFO - Connected to database 'projapoti_65_v2' on 10.0.1.160:3306
+2025-12-30 16:16:06,933 - INFO - Transaction committed successfully
+2025-12-30 16:16:06,937 - INFO - Database connection closed
+2026-01-04 09:55:53,786 - ERROR - Database connection error: 2003 (HY000): Can't connect to MySQL server on '10.0.1.42:3306' (10060)
+2026-01-04 10:08:03,215 - ERROR - Database connection error: 2003 (HY000): Can't connect to MySQL server on '10.0.1.42:3306' (10060)
+2026-01-04 10:08:34,417 - ERROR - Database connection error: 2003 (HY000): Can't connect to MySQL server on '10.0.1.42:3306' (10065)
+2026-01-04 10:08:37,592 - INFO - Connected to database 'projapoti_db_v2' on 10.0.1.42:3306
+2026-01-04 10:08:37,598 - INFO - All selected databases are added to the queue
+2026-01-04 10:08:37,601 - INFO - Database connection closed
+2026-01-04 10:08:37,627 - INFO - Connected to database 'projapoti_65_v2' on 10.0.1.160:3306
+2026-01-04 10:08:37,673 - INFO - Transaction committed successfully
+2026-01-04 10:08:37,713 - INFO - Transaction committed successfully
+2026-01-04 10:08:37,748 - INFO - Transaction committed successfully
+2026-01-04 10:08:37,784 - INFO - Transaction committed successfully
+2026-01-04 10:08:37,825 - INFO - Transaction committed successfully
+2026-01-04 10:08:37,869 - INFO - Transaction committed successfully
+2026-01-04 10:08:37,918 - INFO - Transaction committed successfully
+2026-01-04 10:08:37,970 - INFO - Transaction committed successfully
+2026-01-04 10:08:38,013 - INFO - Transaction committed successfully
+2026-01-04 10:08:38,020 - INFO - Database connection closed
