@@ -34,3 +34,148 @@
 2026-01-04 10:56:44,619 - INFO - Updated id=27675, size before: 52020 bytes, size after: 52020 bytes
 2026-01-04 10:56:44,623 - INFO - Finished processing khoshra_draft_versions for projapoti_65_v2
 2026-01-04 10:56:44,628 - INFO - Database connection closed
+2026-01-04 11:10:59,757 - ERROR - Database connection error: 2003 (HY000): Can't connect to MySQL server on '10.0.1.42:3306' (10065)
+2026-01-04 11:11:04,189 - INFO - Connected to database 'projapoti_db_v2' on 10.0.1.42:3306
+2026-01-04 11:11:04,194 - INFO - Found office domain: 10.0.1.160
+2026-01-04 11:11:04,195 - INFO - All selected databases are added to the queue
+2026-01-04 11:11:04,198 - INFO - Database connection closed
+2026-01-04 11:11:04,225 - INFO - Connected to database 'projapoti_65_v2' on 10.0.1.160:3306
+2026-01-04 11:11:04,225 - INFO - Connected to projapoti_65_v2 at 10.0.1.160
+2026-01-04 11:11:04,233 - INFO - Starting processing khoshra_draft_versions from id 27667
+2026-01-04 11:11:04,245 - INFO - Processing id=27667
+2026-01-04 11:11:04,273 - INFO - Transaction committed successfully
+2026-01-04 11:11:04,273 - INFO - Updated id=27667 progress=1/{'total_rows': 9}, size before: 35780 bytes, size after: 35780 bytes
+2026-01-04 11:11:04,286 - INFO - Processing id=27668
+2026-01-04 11:11:04,317 - INFO - Transaction committed successfully
+2026-01-04 11:11:04,317 - INFO - Updated id=27668 progress=2/{'total_rows': 9}, size before: 35192 bytes, size after: 35192 bytes
+2026-01-04 11:11:04,330 - INFO - Processing id=27669
+2026-01-04 11:11:04,353 - INFO - Transaction committed successfully
+2026-01-04 11:11:04,354 - INFO - Updated id=27669 progress=3/{'total_rows': 9}, size before: 34428 bytes, size after: 34428 bytes
+2026-01-04 11:11:04,366 - INFO - Processing id=27670
+2026-01-04 11:11:04,391 - INFO - Transaction committed successfully
+2026-01-04 11:11:04,392 - INFO - Updated id=27670 progress=4/{'total_rows': 9}, size before: 34788 bytes, size after: 34788 bytes
+2026-01-04 11:11:04,404 - INFO - Processing id=27671
+2026-01-04 11:11:04,430 - INFO - Transaction committed successfully
+2026-01-04 11:11:04,430 - INFO - Updated id=27671 progress=5/{'total_rows': 9}, size before: 40744 bytes, size after: 40744 bytes
+2026-01-04 11:11:04,443 - INFO - Processing id=27672
+2026-01-04 11:11:04,472 - INFO - Transaction committed successfully
+2026-01-04 11:11:04,472 - INFO - Updated id=27672 progress=6/{'total_rows': 9}, size before: 42748 bytes, size after: 42748 bytes
+2026-01-04 11:11:04,485 - INFO - Processing id=27673
+2026-01-04 11:11:04,516 - INFO - Transaction committed successfully
+2026-01-04 11:11:04,516 - INFO - Updated id=27673 progress=7/{'total_rows': 9}, size before: 45608 bytes, size after: 45608 bytes
+2026-01-04 11:11:04,533 - INFO - Processing id=27674
+2026-01-04 11:11:04,559 - INFO - Transaction committed successfully
+2026-01-04 11:11:04,560 - INFO - Updated id=27674 progress=8/{'total_rows': 9}, size before: 51468 bytes, size after: 51468 bytes
+2026-01-04 11:11:04,574 - INFO - Processing id=27675
+2026-01-04 11:11:04,603 - INFO - Transaction committed successfully
+2026-01-04 11:11:04,603 - INFO - Updated id=27675 progress=9/{'total_rows': 9}, size before: 52020 bytes, size after: 52020 bytes
+2026-01-04 11:11:04,608 - INFO - Finished processing khoshra_draft_versions for projapoti_65_v2
+2026-01-04 11:11:04,611 - INFO - Database connection closed
+2026-01-04 11:11:27,720 - INFO - Connected to database 'projapoti_db_v2' on 10.0.1.42:3306
+2026-01-04 11:11:27,725 - INFO - Found office domain: 10.0.1.160
+2026-01-04 11:11:27,726 - INFO - All selected databases are added to the queue
+2026-01-04 11:11:27,730 - INFO - Database connection closed
+2026-01-04 11:11:27,755 - INFO - Connected to database 'projapoti_65_v2' on 10.0.1.160:3306
+2026-01-04 11:11:27,755 - INFO - Connected to projapoti_65_v2 at 10.0.1.160
+2026-01-04 11:11:27,763 - INFO - Starting processing khoshra_draft_versions from id 27667
+2026-01-04 11:11:27,776 - INFO - Processing id=27667
+2026-01-04 11:11:27,807 - INFO - Transaction committed successfully
+2026-01-04 11:11:27,807 - INFO - Updated id=27667 progress=1/{'total_rows': 9}, size before: 35780 bytes, size after: 35780 bytes
+2026-01-04 11:11:27,822 - INFO - Processing id=27668
+2026-01-04 11:11:27,852 - INFO - Transaction committed successfully
+2026-01-04 11:11:27,853 - INFO - Updated id=27668 progress=2/{'total_rows': 9}, size before: 35192 bytes, size after: 35192 bytes
+2026-01-04 11:11:27,866 - INFO - Processing id=27669
+2026-01-04 11:11:27,903 - INFO - Transaction committed successfully
+2026-01-04 11:11:27,904 - INFO - Updated id=27669 progress=3/{'total_rows': 9}, size before: 34428 bytes, size after: 34428 bytes
+2026-01-04 11:11:27,958 - INFO - Processing id=27670
+2026-01-04 11:11:27,982 - INFO - Transaction committed successfully
+2026-01-04 11:11:28,003 - INFO - Updated id=27670 progress=4/{'total_rows': 9}, size before: 34788 bytes, size after: 34788 bytes
+2026-01-04 11:11:28,033 - INFO - Processing id=27671
+2026-01-04 11:11:28,068 - INFO - Transaction committed successfully
+2026-01-04 11:11:28,068 - INFO - Updated id=27671 progress=5/{'total_rows': 9}, size before: 40744 bytes, size after: 40744 bytes
+2026-01-04 11:11:28,082 - INFO - Processing id=27672
+2026-01-04 11:11:28,107 - INFO - Transaction committed successfully
+2026-01-04 11:11:28,108 - INFO - Updated id=27672 progress=6/{'total_rows': 9}, size before: 42748 bytes, size after: 42748 bytes
+2026-01-04 11:11:28,123 - INFO - Processing id=27673
+2026-01-04 11:11:28,153 - INFO - Transaction committed successfully
+2026-01-04 11:11:28,153 - INFO - Updated id=27673 progress=7/{'total_rows': 9}, size before: 45608 bytes, size after: 45608 bytes
+2026-01-04 11:11:28,167 - INFO - Processing id=27674
+2026-01-04 11:11:28,197 - INFO - Transaction committed successfully
+2026-01-04 11:11:28,198 - INFO - Updated id=27674 progress=8/{'total_rows': 9}, size before: 51468 bytes, size after: 51468 bytes
+2026-01-04 11:11:28,211 - INFO - Processing id=27675
+2026-01-04 11:11:28,242 - INFO - Transaction committed successfully
+2026-01-04 11:11:28,242 - INFO - Updated id=27675 progress=9/{'total_rows': 9}, size before: 52020 bytes, size after: 52020 bytes
+2026-01-04 11:11:28,246 - INFO - Finished processing khoshra_draft_versions for projapoti_65_v2
+2026-01-04 11:11:28,249 - INFO - Database connection closed
+2026-01-04 11:12:10,551 - INFO - Connected to database 'projapoti_db_v2' on 10.0.1.42:3306
+2026-01-04 11:12:10,556 - INFO - Found office domain: 10.0.1.160
+2026-01-04 11:12:10,556 - INFO - All selected databases are added to the queue
+2026-01-04 11:12:10,561 - INFO - Database connection closed
+2026-01-04 11:12:10,588 - INFO - Connected to database 'projapoti_65_v2' on 10.0.1.160:3306
+2026-01-04 11:12:10,588 - INFO - Connected to projapoti_65_v2 at 10.0.1.160
+2026-01-04 11:12:10,595 - INFO - Starting processing khoshra_draft_versions from id 27667
+2026-01-04 11:12:10,608 - INFO - Processing id=27667
+2026-01-04 11:12:10,644 - INFO - Transaction committed successfully
+2026-01-04 11:12:10,644 - INFO - Updated id=27667 progress=1/{'total_rows': 9}, size before: 35780 bytes, size after: 35780 bytes
+2026-01-04 11:12:10,656 - INFO - Processing id=27668
+2026-01-04 11:12:10,687 - INFO - Transaction committed successfully
+2026-01-04 11:12:10,687 - INFO - Updated id=27668 progress=2/{'total_rows': 9}, size before: 35192 bytes, size after: 35192 bytes
+2026-01-04 11:12:10,698 - INFO - Processing id=27669
+2026-01-04 11:12:10,741 - INFO - Transaction committed successfully
+2026-01-04 11:12:10,741 - INFO - Updated id=27669 progress=3/{'total_rows': 9}, size before: 34428 bytes, size after: 34428 bytes
+2026-01-04 11:12:10,752 - INFO - Processing id=27670
+2026-01-04 11:12:10,775 - INFO - Transaction committed successfully
+2026-01-04 11:12:10,776 - INFO - Updated id=27670 progress=4/{'total_rows': 9}, size before: 34788 bytes, size after: 34788 bytes
+2026-01-04 11:12:10,790 - INFO - Processing id=27671
+2026-01-04 11:12:10,819 - INFO - Transaction committed successfully
+2026-01-04 11:12:10,819 - INFO - Updated id=27671 progress=5/{'total_rows': 9}, size before: 40744 bytes, size after: 40744 bytes
+2026-01-04 11:12:10,832 - INFO - Processing id=27672
+2026-01-04 11:12:10,864 - INFO - Transaction committed successfully
+2026-01-04 11:12:10,865 - INFO - Updated id=27672 progress=6/{'total_rows': 9}, size before: 42748 bytes, size after: 42748 bytes
+2026-01-04 11:12:10,878 - INFO - Processing id=27673
+2026-01-04 11:12:10,908 - INFO - Transaction committed successfully
+2026-01-04 11:12:10,909 - INFO - Updated id=27673 progress=7/{'total_rows': 9}, size before: 45608 bytes, size after: 45608 bytes
+2026-01-04 11:12:10,925 - INFO - Processing id=27674
+2026-01-04 11:12:10,959 - INFO - Transaction committed successfully
+2026-01-04 11:12:10,959 - INFO - Updated id=27674 progress=8/{'total_rows': 9}, size before: 51468 bytes, size after: 51468 bytes
+2026-01-04 11:12:10,974 - INFO - Processing id=27675
+2026-01-04 11:12:11,006 - INFO - Transaction committed successfully
+2026-01-04 11:12:11,006 - INFO - Updated id=27675 progress=9/{'total_rows': 9}, size before: 52020 bytes, size after: 52020 bytes
+2026-01-04 11:12:11,011 - INFO - Finished processing khoshra_draft_versions for projapoti_65_v2
+2026-01-04 11:12:11,015 - INFO - Database connection closed
+2026-01-04 11:12:16,514 - INFO - Connected to database 'projapoti_db_v2' on 10.0.1.42:3306
+2026-01-04 11:12:16,520 - INFO - Found office domain: 10.0.1.160
+2026-01-04 11:12:16,520 - INFO - All selected databases are added to the queue
+2026-01-04 11:12:16,524 - INFO - Database connection closed
+2026-01-04 11:12:16,551 - INFO - Connected to database 'projapoti_65_v2' on 10.0.1.160:3306
+2026-01-04 11:12:16,551 - INFO - Connected to projapoti_65_v2 at 10.0.1.160
+2026-01-04 11:12:16,558 - INFO - Starting processing khoshra_draft_versions from id 27667
+2026-01-04 11:12:16,570 - INFO - Processing id=27667
+2026-01-04 11:12:16,602 - INFO - Transaction committed successfully
+2026-01-04 11:12:16,602 - INFO - Updated id=27667 progress=1/9, size before: 35780 bytes, size after: 35780 bytes
+2026-01-04 11:12:16,615 - INFO - Processing id=27668
+2026-01-04 11:12:16,641 - INFO - Transaction committed successfully
+2026-01-04 11:12:16,641 - INFO - Updated id=27668 progress=2/9, size before: 35192 bytes, size after: 35192 bytes
+2026-01-04 11:12:16,654 - INFO - Processing id=27669
+2026-01-04 11:12:16,682 - INFO - Transaction committed successfully
+2026-01-04 11:12:16,682 - INFO - Updated id=27669 progress=3/9, size before: 34428 bytes, size after: 34428 bytes
+2026-01-04 11:12:16,693 - INFO - Processing id=27670
+2026-01-04 11:12:16,721 - INFO - Transaction committed successfully
+2026-01-04 11:12:16,721 - INFO - Updated id=27670 progress=4/9, size before: 34788 bytes, size after: 34788 bytes
+2026-01-04 11:12:16,734 - INFO - Processing id=27671
+2026-01-04 11:12:16,764 - INFO - Transaction committed successfully
+2026-01-04 11:12:16,764 - INFO - Updated id=27671 progress=5/9, size before: 40744 bytes, size after: 40744 bytes
+2026-01-04 11:12:16,778 - INFO - Processing id=27672
+2026-01-04 11:12:16,802 - INFO - Transaction committed successfully
+2026-01-04 11:12:16,803 - INFO - Updated id=27672 progress=6/9, size before: 42748 bytes, size after: 42748 bytes
+2026-01-04 11:12:16,815 - INFO - Processing id=27673
+2026-01-04 11:12:16,845 - INFO - Transaction committed successfully
+2026-01-04 11:12:16,846 - INFO - Updated id=27673 progress=7/9, size before: 45608 bytes, size after: 45608 bytes
+2026-01-04 11:12:16,863 - INFO - Processing id=27674
+2026-01-04 11:12:16,893 - INFO - Transaction committed successfully
+2026-01-04 11:12:16,894 - INFO - Updated id=27674 progress=8/9, size before: 51468 bytes, size after: 51468 bytes
+2026-01-04 11:12:16,910 - INFO - Processing id=27675
+2026-01-04 11:12:16,936 - INFO - Transaction committed successfully
+2026-01-04 11:12:16,937 - INFO - Updated id=27675 progress=9/9, size before: 52020 bytes, size after: 52020 bytes
+2026-01-04 11:12:16,940 - INFO - Finished processing khoshra_draft_versions for projapoti_65_v2
+2026-01-04 11:12:16,944 - INFO - Database connection closed

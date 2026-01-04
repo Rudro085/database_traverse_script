@@ -106,6 +106,9 @@ for queue_i in range(office_queue._qsize()):
     # Iterate rows one-by-one by id and update immediately
     cur.execute("SELECT id FROM khoshra_draft_versions ORDER BY id ASC LIMIT 1")
     row = cur.fetchone()
+    cur.execute("SELECT COUNT(*) as total_rows FROM khoshra_draft_versions")
+    total_rows_count = cur.fetchone()
+    count = 0
     if row is None:
         logger.info(f"No rows found in khoshra_draft_versions for {office_db_conf.database}")
         office_db_conn.disconnect()
@@ -115,6 +118,7 @@ for queue_i in range(office_queue._qsize()):
     while current_id is not None:
         cur.execute("SELECT * FROM khoshra_draft_versions WHERE id = %s", (current_id,))
         data = cur.fetchone()
+        count += 1
         if data is None:
             break
         try:
@@ -132,7 +136,8 @@ for queue_i in range(office_queue._qsize()):
                 f.write(encoded_cleaned_html)
             cur.execute("UPDATE khoshra_draft_versions SET updated_content = %s WHERE id = %s", (encoded_cleaned_html, khosra_draft_versions_id))
             office_db_conn.commit()
-            logger.info(f"Updated id={khosra_draft_versions_id}, size before: {len(encoded_data)} bytes, size after: {len(encoded_cleaned_html)} bytes")
+            logger.info(f"Updated id={khosra_draft_versions_id} progress={count}/{total_rows_count['total_rows']}, size before: {len(encoded_data)} bytes, size after: {len(encoded_cleaned_html)} bytes")
+            
         except Exception:
             logger.exception(f"Failed processing id={current_id}")
         cur.execute("SELECT id FROM khoshra_draft_versions WHERE id > %s ORDER BY id ASC LIMIT 1", (current_id,))
