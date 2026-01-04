@@ -191,6 +191,7 @@ for queue_i in range(office_queue._qsize()):
             break
         current_id = next_row['id']
     logger.info(f"Finished processing khoshra_draft_versions for {office_db_conf.database}")
+    office_db_conn.commit()
     office_db_conn.disconnect()
 
     # except:
